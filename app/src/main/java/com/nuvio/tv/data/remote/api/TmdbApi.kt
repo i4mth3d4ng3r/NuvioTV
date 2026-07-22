@@ -180,7 +180,8 @@ interface TmdbApi {
         @Query("watch_region") watchRegion: String? = null,
         @Query("with_watch_providers") withWatchProviders: String? = null,
         @Query("with_watch_monetization_types") withWatchMonetizationTypes: String? = null,
-        @Query("with_release_type") withReleaseType: String? = null
+        @Query("with_release_type") withReleaseType: String? = null,
+        @Query("release_date.lte") releaseTypeDateLte: String? = null
     ): Response<TmdbDiscoverResponse>
 
     @GET("discover/tv")
