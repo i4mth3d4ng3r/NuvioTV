@@ -261,6 +261,7 @@ class TmdbCollectionSourceResolver @Inject constructor(
                 withWatchProviders = filters.withWatchProviders,
                 withWatchMonetizationTypes = if (!filters.withWatchProviders.isNullOrBlank()) "flatrate|free|ads|rent|buy" else null,
                 withReleaseType = if (filters.digitalRelease) "4|5|6" else null
+                releaseTypeDateLte = if (filters.digitalRelease) today else null
             ).body()
             TmdbCollectionMediaType.TV -> tmdbApi.discoverTv(
                 apiKey = BuildConfig.TMDB_API_KEY,
@@ -275,7 +276,7 @@ class TmdbCollectionSourceResolver @Inject constructor(
                     TmdbCollectionSourceType.NETWORK -> source.tmdbId?.toString()
                     else -> filters.withNetworks
                 },
-                firstAirDateLte = filters.releaseDateLte ?: if (source.sourceType == TmdbCollectionSourceType.NETWORK) today else null,
+                firstAirDateLte = filters.releaseDateLte ?: if (filters.digitalRelease || source.sourceType == TmdbCollectionSourceType.NETWORK) today else null,
                 withStatus = when {
                     filters.digitalRelease -> "0|3|4|5"
                     source.sourceType == TmdbCollectionSourceType.NETWORK -> "0|3|4"
