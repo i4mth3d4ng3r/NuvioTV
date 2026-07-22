@@ -179,7 +179,8 @@ interface TmdbApi {
         @Query("year") year: Int? = null,
         @Query("watch_region") watchRegion: String? = null,
         @Query("with_watch_providers") withWatchProviders: String? = null,
-        @Query("with_watch_monetization_types") withWatchMonetizationTypes: String? = null
+        @Query("with_watch_monetization_types") withWatchMonetizationTypes: String? = null,
+        @Query("with_release_type") withReleaseType: String? = null
     ): Response<TmdbDiscoverResponse>
 
     @GET("discover/tv")

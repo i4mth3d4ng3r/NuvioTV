@@ -768,7 +768,8 @@ class AddonManagerViewModel @Inject constructor(
                                         withNetworks = source.filters.withNetworks,
                                         year = source.filters.year,
                                         watchRegion = source.filters.watchRegion,
-                                        withWatchProviders = source.filters.withWatchProviders
+                                        withWatchProviders = source.filters.withWatchProviders,
+                                        digitalRelease = if (source.filters.digitalRelease) true else null
                                     )
                                 )
                                 is TraktCollectionSource -> CollectionSourceInfo(

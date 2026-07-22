@@ -626,6 +626,12 @@ private fun TmdbDiscoverForm(
         ) {
             onFiltersChange(filters.copy(watchRegion = it.ifBlank { null }))
         }
+        TmdbToggleRow(
+            label = stringResource(R.string.collections_editor_tmdb_digital_release),
+            helper = stringResource(R.string.collections_editor_tmdb_digital_release_helper),
+            checked = filters.digitalRelease,
+            onCheckedChange = { onFiltersChange(filters.copy(digitalRelease = it)) }
+        )
         TmdbActionButtons(onSearch = null, onAdd = onAdd, addLabel = actionLabel)
     }
 }
@@ -663,6 +669,38 @@ private fun TmdbLabeledField(
             modifier = Modifier.fillMaxWidth(),
             placeholder = placeholder
         )
+        if (helper.isNotBlank()) {
+            Text(helper, style = MaterialTheme.typography.bodySmall, color = NuvioTheme.colors.TextTertiary)
+        }
+    }
+}
+
+@OptIn(ExperimentalTvMaterial3Api::class)
+@Composable
+private fun TmdbToggleRow(
+    label: String,
+    helper: String,
+    checked: Boolean,
+    onCheckedChange: (Boolean) -> Unit
+) {
+    Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(label, style = MaterialTheme.typography.labelMedium, color = NuvioTheme.colors.TextPrimary)
+            Switch(
+                checked = checked,
+                onCheckedChange = onCheckedChange,
+                colors = SwitchDefaults.colors(
+                    checkedThumbColor = NuvioTheme.colors.Secondary,
+                    checkedTrackColor = NuvioTheme.colors.Secondary.copy(alpha = 0.3f),
+                    uncheckedThumbColor = NuvioTheme.colors.TextSecondary,
+                    uncheckedTrackColor = NuvioTheme.colors.BackgroundCard
+                )
+            )
+        }
         if (helper.isNotBlank()) {
             Text(helper, style = MaterialTheme.typography.bodySmall, color = NuvioTheme.colors.TextTertiary)
         }

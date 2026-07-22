@@ -257,7 +257,8 @@ class CollectionsDataStore @Inject constructor(
         val withNetworks: String? = null,
         val year: Int? = null,
         val watchRegion: String? = null,
-        val withWatchProviders: String? = null
+        val withWatchProviders: String? = null,
+        val digitalRelease: Boolean? = null
     )
 
     @androidx.annotation.Keep
@@ -345,7 +346,8 @@ class CollectionsDataStore @Inject constructor(
         withNetworks = withNetworks,
         year = year,
         watchRegion = watchRegion,
-        withWatchProviders = withWatchProviders
+        withWatchProviders = withWatchProviders,
+        digitalRelease = if (digitalRelease) true else null
     )
 
     private fun SerializableCollection.toDomain() = Collection(
@@ -449,6 +451,7 @@ class CollectionsDataStore @Inject constructor(
         withNetworks = withNetworks,
         year = year,
         watchRegion = watchRegion,
-        withWatchProviders = withWatchProviders
+        withWatchProviders = withWatchProviders,
+        digitalRelease = digitalRelease ?: false
     )
 }

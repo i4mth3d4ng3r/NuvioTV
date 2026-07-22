@@ -109,7 +109,8 @@ data class TmdbCollectionFilters(
     val withNetworks: String? = null,
     val year: Int? = null,
     val watchRegion: String? = null,
-    val withWatchProviders: String? = null
+    val withWatchProviders: String? = null,
+    val digitalRelease: Boolean = false
 )
 
 @Immutable
